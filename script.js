@@ -1,3 +1,9 @@
+/**
+ * Classe para retornar um numero por extenso com exibição da moeda opcional.
+ * @author Eric Coutinho <ericoutinho@gmail.com>
+ * @package NumberInFull
+ * @copyright 2021
+ */
 class NumberIF {
 
     units    = ['', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove'];
@@ -13,6 +19,11 @@ class NumberIF {
         this.currency = currency;
     }
 
+    /**
+     * Faz a leitura do número armazenado no parâmetro 'number' e retorna ele por extenso
+     * @package NumberInFull
+     * @returns {string} Valor por extenso do número informado
+     */
     readNumber() {
         let dc = this.number.split(".")[1];
         let it = this.number.split(".")[0];
@@ -31,6 +42,13 @@ class NumberIF {
         return integer + decimals;
     }
 
+    /**
+     * Faz a leitura da centena e retorna seu valor por extenso
+     * @package NumberInFull
+     * @param {string} part Centena a ser retornada
+     * @param {number} classNumber Classe numérica da parte informada
+     * @returns {string} Valor por extenso da centena informada
+     */
     readPart(part, classNumber) {
         let number = this.padZeros(part);
         let c='', d='', u='', h='';
@@ -56,10 +74,22 @@ class NumberIF {
         return c + (((c && d) || (c && u)) ? ' e ' : '') + d + (d && u ? ' e ' : '') + u + (h ? ` ${h}` : '');
     }
 
+    /**
+     * Retorna o valor do decimal do número
+     * @package NumberInFull
+     * @param {string} decimal O valor decimal a ser lido
+     * @returns {string} O valor por extenso do decimal informado
+     */
     readDecimals(decimal) {
         return  (parseInt(decimal) > 0) ? ` e ${this.readPart(decimal)}` : '';
     }
 
+    /**
+     * Preenche com zeros a esquerda caso a centena tenha menos de 3 casas
+     * @package NumberInFull
+     * @param {string} toPadNumber Valor numérico a ser acrescido de zeros
+     * @returns {string} O valor acrescido
+     */
     padZeros(toPadNumber){
         return (`000${toPadNumber}`).slice(-3);
     }
